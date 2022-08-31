@@ -59,6 +59,10 @@ public class ActorController : MonoBehaviour
         rigid.velocity = new Vector3(planerVec.x, rigid.velocity.y, planerVec.z) + thrustVec;
         thrustVec = Vector3.zero;
     }
+    /**
+     * 
+     * =====================以下为接受msg===========================================
+     */
 
     public void JumpEnter()
     {
@@ -73,5 +77,14 @@ public class ActorController : MonoBehaviour
         pi.SWITCH = true;
         lockPlaner = false;
         //print("JumpExit");
+    }
+    public void IsGround()
+    {
+        anim.SetBool("isGround", true);
+    }
+
+    public void IsNotGround()
+    {
+        anim.SetBool("isGround", false);
     }
 }
