@@ -1657,15 +1657,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97840e60b1b02f2468fe0692d00842d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SWITCH: 1
   KeyUp: w
   KeyDown: s
   KeyLeft: a
   KeyRight: d
+  KeyA: 
+  KeyB: 
+  KeyC: 
+  KeyD: 
   Dup: 0
   Dright: 0
   Dmag: 0
   Dvec: {x: 0, y: 0, z: 0}
+  run: 0
+  SWITCH: 1
   targetDup: 0
   targetDright: 0
   velocityDup: 0
@@ -2200,15 +2205,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97840e60b1b02f2468fe0692d00842d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SWITCH: 1
   KeyUp: w
   KeyDown: s
   KeyLeft: a
   KeyRight: d
+  KeyA: left shift
+  KeyB: space
+  KeyC: 
+  KeyD: 
   Dup: 0
   Dright: 0
   Dmag: 0
   Dvec: {x: 0, y: 0, z: 0}
+  run: 0
+  SWITCH: 1
   targetDup: 0
   targetDright: 0
   velocityDup: 0
@@ -2241,7 +2251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 484774064}
   pi: {fileID: 0}
-  RunSpeed: 1.5
+  walkSpeed: 2
+  runSpeed: 3
   movingVec: {x: 0, y: 0, z: 0}
 --- !u!54 &1949112596
 Rigidbody:
