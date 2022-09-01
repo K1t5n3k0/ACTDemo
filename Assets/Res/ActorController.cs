@@ -10,6 +10,9 @@ public class ActorController : MonoBehaviour
 
     public float walkSpeed = 2.0f;
     public float runSpeed = 3.0f;
+    public float rollVelocity = 0f;
+    Vector3 rollVelocity1 = new Vector3(0,0,1);
+
     [SerializeField]
     private Vector3 movingVec;
     private Animator anim;
@@ -32,6 +35,16 @@ public class ActorController : MonoBehaviour
         //设置动画混合树
         //使用lerp函数做插值，使切换不那么生硬
         anim.SetFloat("forward", pi.Dmag * Mathf.Lerp(anim.GetFloat("forward"), ((pi.run) ? runSpeed : 1.0f), 0.1f));
+        //设置翻滚信号
+        if (rigid.velocity.magnitude > 10.0f)
+        {
+        //   anim.SetTrigger("roll");
+        }
+
+        if (pi.roll)
+        {
+            anim.SetTrigger("roll");
+        }
         //设跳跃信号
         if (pi.jump)
         {
@@ -56,7 +69,7 @@ public class ActorController : MonoBehaviour
         //rigid.position += new Vector3( 0,0,1.0f) * Time.fixedDeltaTime;
         //print(rigid.position);
         //rigid.position = rigid.position + planerVec * Time.fixedDeltaTime + thrustVec;
-        rigid.velocity = new Vector3(planerVec.x, rigid.velocity.y, planerVec.z) + thrustVec;
+        rigid.velocity = new Vector3(planerVec.x, rigid.velocity.y, planerVec.z) + rollVelocity1 * rollVelocity + thrustVec;
         thrustVec = Vector3.zero;
     }
     /**
@@ -66,18 +79,18 @@ public class ActorController : MonoBehaviour
 
     public void JumpEnter()
     {
-        pi.SWITCH = false;
-        lockPlaner = true;
+        //pi.SWITCH = false;
+        //lockPlaner = true;
         thrustVec = new Vector3(0, 4f, 0);
         //print("JumpEnter");
     }
-
+    /*
     public void JumpExit()
     {
         pi.SWITCH = true;
         lockPlaner = false;
         //print("JumpExit");
-    }
+    }*/
     public void IsGround()
     {
         anim.SetBool("isGround", true);
@@ -86,5 +99,31 @@ public class ActorController : MonoBehaviour
     public void IsNotGround()
     {
         anim.SetBool("isGround", false);
+    }
+
+    public void OnGroundEnter()
+    {
+        pi.SWITCH = true;
+        lockPlaner = false;
+    }
+
+    public void OnGroundExit()
+    {
+        pi.SWITCH = false;
+        lockPlaner = true;
+    }
+
+    public void OnRollEnter()
+    {
+        rollVelocity1 = new Vector3(0, 0, 1f);
+        rollVelocity = 10f;
+        pi.SWITCH = false;
+        lockPlaner = true;
+        //thrustVec = new Vector3(0, 0, rollVelocity);
+    }
+
+    public void OnRollExit()
+    {
+        rollVelocity = 0f;
     }
 }

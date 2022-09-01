@@ -11,8 +11,8 @@ public class PlayerInput : MonoBehaviour
     public string KeyRight = "d";
 
     public string KeyA = "left shift";
-    public string KeyB = "space";
-    public string KeyC;
+    public string KeyB = "c";
+    public string KeyC = "space";
     public string KeyD;
 
     [Header("=====Output signals=====")]
@@ -23,6 +23,7 @@ public class PlayerInput : MonoBehaviour
     //1.pressing signal
     public bool run;
     //2.trigger signal
+    public bool roll;
     public bool jump;
     private bool lastJump;
     //3.double sognal
@@ -34,13 +35,6 @@ public class PlayerInput : MonoBehaviour
     public float targetDright;
     public float velocityDup;
     public float velocityDright;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -64,19 +58,21 @@ public class PlayerInput : MonoBehaviour
 
         Dmag = Mathf.Sqrt((Dup2*Dup2) + (Dright2 * Dright2));
         Dvec = Dright2 * transform.right + Dup2 * transform.forward;
-
+        //ÅÜ²½
         run = Input.GetKey(KeyA);
+        //ÌøÔ¾
         bool newjump = Input.GetKey(KeyB);
         if (newjump != lastJump && newjump == true)
         {
             jump = true;
-
         }
         else
         {
             jump = false;
         }
         lastJump = newjump;
+        //·­¹ö
+        roll = Input.GetKey(KeyC);
     }
 
     private Vector2 SquareToCricle(Vector2 input){
